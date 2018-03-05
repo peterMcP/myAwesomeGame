@@ -12,6 +12,9 @@ int main(int argc, char* argv[])
 {
 
 	IMG_Init(IMG_INIT_PNG);
+	SDL_Surface *background = IMG_Load("background.png");
+	SDL_Texture *bg;
+	
 
 
 	struct windowPos {
@@ -47,6 +50,8 @@ int main(int argc, char* argv[])
 		-1,
 		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
 		);
+
+	bg = SDL_CreateTextureFromSurface(ren, background); //renderer and surface
 	
 	SDL_Rect rectangle1;
 	SDL_Rect bullet;
@@ -189,8 +194,11 @@ int main(int argc, char* argv[])
 		rectangle1.y += rect1_yvel;
 		rectangle1.x += rect1_xvel;
 
-		SDL_SetRenderDrawColor(ren, 0, 121, 220, 255); //RGB and alpha background
 		SDL_RenderClear(ren);
+		//SDL_SetRenderDrawColor(ren, 0, 121, 220, 255); //RGB and alpha background
+		
+		SDL_RenderCopy(ren, bg, NULL, NULL);
+
 		SDL_SetRenderDrawColor(ren, 255, 50, 50, 255); //rec player
 		SDL_RenderFillRect(ren, &rectangle1);
 		
