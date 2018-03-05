@@ -1,4 +1,6 @@
 #include "SDL/include/SDL.h"
+#include "SDL_Image/include/SDL_image.h"
+#pragma comment(lib,"../SDL_Image/libx86/SDL2_image.lib")
 #pragma comment(lib, "../SDL/libx86/SDL2.lib")
 #pragma comment(lib,"../SDL/libx86/SDL2main.lib")
 #define windowWidth 640
@@ -8,6 +10,10 @@
 
 int main(int argc, char* argv[])
 {
+
+	IMG_Init(IMG_INIT_PNG);
+
+
 	struct windowPos {
 		char *title;
 		int x;
