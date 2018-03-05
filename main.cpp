@@ -13,7 +13,11 @@ int main(int argc, char* argv[])
 
 	IMG_Init(IMG_INIT_PNG);
 	SDL_Surface *background = IMG_Load("background.png");
+	SDL_Surface *player = IMG_Load("player.png");
+	SDL_Surface *bulletM = IMG_Load("bulletMorty.png");
 	SDL_Texture *bg;
+	SDL_Texture *rick;
+	SDL_Texture *bulletMorty;
 	
 
 
@@ -52,6 +56,8 @@ int main(int argc, char* argv[])
 		);
 
 	bg = SDL_CreateTextureFromSurface(ren, background); //renderer and surface
+	rick = SDL_CreateTextureFromSurface(ren, player); //renderer and surface
+	bulletMorty = SDL_CreateTextureFromSurface(ren, bulletM);
 	
 	SDL_Rect rectangle1;
 	SDL_Rect bullet;
@@ -59,15 +65,15 @@ int main(int argc, char* argv[])
 	rectangle1 = { //x,y,w,h
 		gameWindow.width / 2,
 		gameWindow.height / 2,
-		32,
-		32 
+		128,
+		128 
 	};
 
 	bullet = {
 		rectangle1.x,
 		rectangle1.y,
-		60,
-		10 };
+		100,
+		30 };
 	int maxBullets = 10;
 	int currentBullets;
 
@@ -89,7 +95,7 @@ int main(int argc, char* argv[])
 	bool leftPressed = false;
 
 	int playerSpeed = 5;
-	int bulletSpeed = 30;
+	int bulletSpeed = 5;
 	bool spaceShot = false;
 
 	while (1)
@@ -199,14 +205,17 @@ int main(int argc, char* argv[])
 		
 		SDL_RenderCopy(ren, bg, NULL, NULL);
 
-		SDL_SetRenderDrawColor(ren, 255, 50, 50, 255); //rec player
-		SDL_RenderFillRect(ren, &rectangle1);
+		//SDL_SetRenderDrawColor(ren, 255, 50, 50, 255); //rec player
+		//SDL_RenderFillRect(ren, &rectangle1);
+		SDL_RenderCopy(ren, rick, NULL, &rectangle1);
 		
-		SDL_SetRenderDrawColor(ren, 50, 190, 35, 255); //bullet
+		//SDL_SetRenderDrawColor(ren, 50, 190, 35, 255); //bullet
 		//SDL_RenderFillRect(ren, &bullet);
+		//SDL_RenderCopy(ren, bulletMorty, NULL, &bullet);
 		
 		if (spaceShot) { //show and move
-			SDL_RenderFillRect(ren, &bullet);
+			//SDL_RenderFillRect(ren, &bullet);
+			SDL_RenderCopy(ren, bulletMorty, NULL, &bullet);
 			bullet.x += bulletSpeed;
 		}
 		
